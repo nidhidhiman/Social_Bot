@@ -3,13 +3,16 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import  HttpResponse
-from forms import SignUpForm, LoginForm, PostForm, LikeForm, CommentForm
+from forms import SignUpForm, LoginForm, PostForm, LikeForm, CommentForm,MailForm
 from models import UserModel, SessionToken, PostModel, LikeModel, CommentModel
 from django.contrib.auth.hashers import make_password, check_password
 from datetime import timedelta
 from django.utils import timezone
 from socialapp.settings import BASE_DIR
 from imgurpython import ImgurClient
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
 
 # Create your views here.
 #def execute(request):
@@ -143,10 +146,41 @@ def comment_view(request):
     else:
         return redirect('/login')
 
-def logout_view(request):
+
+def log_out(request):
     user = check_validation(request)
-    if user is not None:
-        new_session = SessionToken.objects.filter(user=user).last()
-        if new_session:
-            new_session.delete()
-    return render(request,'logout.html')
+    if user:
+        response = redirect('/')
+        response.delete_cookie(key='session_token')
+        return response
+    else:
+        return redirect('/feed/')
+
+
+
+
+def contact_us(request):
+    if request.method=='POST':
+        form=MailForm(request.POST)
+        if form.is_valid():
+            name=form.cleaned_data['name']
+            city=form.cleaned_data['city']
+            number=form.cleaned_data['number']
+            email=form.cleaned_data['email']
+            subject=form.cleaned_data['subject']
+            feedback=form.cleaned_data['feedback']
+            sg = sendgrid.SendGridAPIClient(apikey='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')
+
+            from_email = Email('rohit@fiblabs.com ')
+            to_email = Email("rohit@fiblabs.com")
+            subject = subject
+            content = Content("text/plain", "Following email is from a user who visited Social Bot Web App"+"\n\n"+feedback+"\n\nFrom: "+name+"\n\nCity: "+city+"\n\nPhone Number: "+number+"\n\nEmail: "+email)
+            mail = Mail(from_email, subject, to_email, content)
+            response = sg.client.mail.send.post(request_body=mail.get())
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+            print("mail sent.")
+            return HttpResponseRedirect('/feed/')
+
+

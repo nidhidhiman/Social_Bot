@@ -3,13 +3,6 @@ from django.db import models
 import uuid
 
 # Create your models here.
-class User(models.Model):
-    name = models.CharField(max_length=254, null=True)
-    phone_no = models.CharField(max_length=30, null=True)
-    age = models.IntegerField(default=0)
-    created_on = models.DateTimeField(auto_now_add=True)
-    has_verified_mobile = models.BooleanField(default=False)
-    update_on = models.DateTimeField(auto_now=True)
 
 class UserModel(models.Model):
     email = models.EmailField()
@@ -62,3 +55,12 @@ class CommentModel(models.Model):
     comment_text = models.CharField(max_length=550)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=120)
+    subject = models.CharField(max_length=120)
+    feedback = models.CharField(max_length=2000)
+    number=models.CharField(max_length=100)
+    email=models.CharField(max_length=200)
+    city=models.CharField(max_length=120)
+

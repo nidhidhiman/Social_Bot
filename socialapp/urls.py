@@ -17,15 +17,16 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
 #from django.conf.url.static import static
-from socialbot.views import sign_up, log_in, feed_view, post_view, like_view, comment_view
+from socialbot.views import sign_up, log_in, feed_view, post_view, like_view, comment_view,log_out,contact_us
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/',log_in),
-    #url(r'^logout/'log_out),
+    url(r'^logout/',log_out),
     url(r'^feed/', feed_view),
     url(r'^post/', post_view),
     url(r'^like/', like_view),
     url(r'^comment/', comment_view),
+    url(r'^contactus/', contact_us),
     url(r'^$',sign_up)
 ]

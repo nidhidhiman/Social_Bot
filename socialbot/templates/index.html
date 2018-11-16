@@ -1,159 +1,91 @@
-{% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-	<link rel="stylesheet" href="{% static 'socialbot/css/bootstrap.min.css' %}" type = "text/css"/>
-    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Social Bot</title>
-    <link href="https://fonts.googleapis.com/css?family=Passion+one|Shrikhand|Ultra|Fugaz+One" rel="stylesheet">
-    <style>
-    body{
-        font-family: 'Passion One', cursive;
-        font-size:18px;
-        overflow-x:hidden;
-    }
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    input{
-        width:300px;
-        display:block;
-        height:40px;
-        border-radius:8px;
-        margin-left:500px;
-    }
 
-    a{
-        font-size:20px;
-        text-align:center;
-        float:right;
-        margin-top:-60px;
-        font-size:40px;
-    }
 
-<!---button_style--->
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="../static/css/index.css" rel="stylesheet"type="text/css">
+		<title>SOCIAL BOT | SIGN UP</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+				<h5>Get Registered and Connect with the World!</h5>
+					<form class="" method="post" action="#">
+                        {% csrf_token %}
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">Your Name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name" value="{{name}}" required>
+								</div>
+							</div>
+						</div>
 
-    .button {
-      display: inline-block;
-      border-radius: 4px;
-      background-color: #f4511e;
-      border: none;
-      color: #FFFFFF;
-      text-align: center;
-      font-size: 28px;
-      padding: 20px;
-      width: 200px;
-      transition: all 0.5s;
-      cursor: pointer;
-      margin: 5px;
-    }
+						<div class="form-group">
+							<label for="email" class="cols-sm-2 control-label">Your Email</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"value="{{email}}" required>
+								</div>
+							</div>
+						</div>
 
-    .button span {
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
-      transition: 0.5s;
-    }
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Username</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" value="{{username}}" required>
+								</div>
+							</div>
+						</div>
 
-    .button span:after {
-      content: '\00bb';
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      right: -20px;
-      transition: 0.5s;
-    }
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"value="{{password}}" required>
+								</div>
+							</div>
+						</div>
+<!--
+						<div class="form-group">
+							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+								</div>
+							</div>
+						</div>
+-->
+						<div class="form-group ">
+							<button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+						</div>
 
-    .button:hover span {
-       padding-right: 25px;
-    }
+					</form>
+                    <h5> Already a User? <a href="/login" style="color:white;">Log in</a></h5>
+				</div>
+			</div>
+		</div>
 
-    .button:hover span:after {
-        opacity: 1;
-        right: 0;
-    }
-
-#part h1{
-padding-top:20px;
-font-family: 'Shrikhand', cursive;
-}
-
-#part h3,h4{
-font-family: 'Fugaz One', cursive;
-}
-
-  #part{
-  text-align: center;
-  background-color: pink;
-  margin-top: -19px;
-  margin-right:-10px;
-  background-repeat:no-repeat;
-  margin-left:-10px;
-  margin-bottom:-40px;
-  background-size: cover;
-  }
-
-#last{
-  background-color:white;
-  text-align: center;
-  height:150px;
-  width:1400px;
-}
-#last h2{
-font-family: 'Shrikhand', cursive;
-}
-
-    </style>
-</head>
-
-<body>
-<div class="main">
-    <center>
-        <section id='part'>
-            <h1>Social Bot</h1>
-            <h3>Sign up</h3>
-            <h4> {{today}} </h4>
-            <!---<img src=""/>--->
-            <div>
-                <form method="post">
-                {% csrf_token %}
-                    <div>
-                        <label for="username">Username:</label>
-                        <input id="username" type="text"  name="username" value={{ username }} >
-                    </div>
-                    <br>
-                    <div class="l1">
-                        <label for="name">Name:</label>
-                        <input id="name" type="text"  name="name" value={{ name }} >
-                    </div>
-                    <br>
-                    <div>
-                        <label for="email">Email:</label>
-                        <input id="email" type="text"  name="email" value={{ email }} >
-                    </div>
-                    <br>
-                    <div>
-                        <label for="password">Password:</label>
-                        <input id="password" type="password"  name="password" value={{ password }} >
-                    </div>
-                    <br>
-                    <input type="submit" value="Sign up">
-                     <h3>Already a user?</h3>
-                   <input type="submit" value="Log in">
-                </form>
-            </div>
-        </section>
-    </center>
-</div>
-<br>
-<section id="last">
-    <footer>
-        <h2>Contact with us...</h2>
-       <!--- <img src="http://i.imgur.com/aAcSKBI.jpg"/>--->
-    </footer>
-</section>
-</body>
+		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	</body>
 </html>
