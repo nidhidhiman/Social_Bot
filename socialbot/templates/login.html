@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8">
+     <!---<link rel="stylesheet" href="{% static 'socialbot/static/css/bootstrap.min.css' %}" type = "text/css"/>--->
+     <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <title>SocialBot_Login</title>
+     <link href="https://fonts.googleapis.com/css?family=Passion+one" rel="stylesheet">
+     <style type="text/css">
+		body {
+		    text-align:center;
+            padding-top:60px;
+            font-family: 'Passion One', cursive;
+            font-size:25px;
+            background-size:cover;
+            background-repeat:no-repeat;
+            background-img:url('{% static "bg-01.jpg" %}')
+		}
+		input{
+            width:300px;
+            display:block;
+            height:40px;
+            border-radius:8px;
+        }
+        .button {
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button2 {
+            width: 34%;
+        }
+	</style>
+ </head>
+ <body>
+ <div class="main">
+     <h1>Log In Form</h1>
+     <br>
+     {% for message in message %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+     {% endfor %}
+ </div>
+ <center>
+     <form class="login_form" method="post" action="/login/">
+             {% csrf_token %}
+             <div>
+                 <label for="username">Username:</label>
+                 <input id="username" type="text" name="username" value={{ username }}>
+             </div>
+             <br>
+             <div>
+                 <label for="password">Password:</label>
+                 <input id="password" type="password" name="password" value={{ password }}>
+             </div>
+             <br>
+             <div><a href="#">forgot password?</a></div>
+             <br>
+             <input type="submit" value="Log In"/>
+     </form>
+ </center>
+ </body>
+</html>

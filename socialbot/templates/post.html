@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Posts</title>
+	<!---<link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type = "text/css"/>--->
+    <link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet">
+    <style>
+        body{
+        font-family: 'Ultra', serif;
+        text-align:center;
+        font-size:40px;
+        background-image: url('{% static "pic.jpg"%}');
+        background-size:cover;
+        }
+        input{
+         width:200px;
+         height:30px;
+         border-radius:5px;
+    </style>
+</head>
+
+<body>
+<form method="POST" enctype="multipart/form-data"><br>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="btn-default btn" value="Add Picture">
+</form>
+</body>
+</html>
